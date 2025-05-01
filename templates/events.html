@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Selwyn Event Ticketing - Events{% endblock %}
+
+{% block content %}
+
+{% if event_id is not defined %}
+<form action="events/customerlist" method="POST" class="needs-validation" novalidate>
+    <div>
+        <label for="eventlist">Select the Event to display</label>
+        <select class="form-select" name="event_id" id="event_id" required>
+            <option disabled selected value="">Choose an Event</option> {% for event in events %} <option
+                value="{{event['event_id']}}">{{event['event_name']}}</option> {% endfor %}
+        </select>
+        <div class="invalid-feedback"> Please choose an Event. </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Select Event</button>
+</form>
+
+{% endif %}
+
+{% endblock %}
