@@ -29,6 +29,20 @@ Only future events with remaining tickets are shown. I added filtering condition
 ### 9. Ticket Summary Page Aggregation
 To display total tickets per customer across all events, I used SQL aggregation (`SUM`) and grouped by event. This allowed for clear reporting and reduced redundant calculations in Python.
 
+*Note: All routes use parameterised queries with `%s` to prevent SQL injection and comply with best practice.*
+
 ---
 
-*Note: All routes use parameterised queries with `%s` to prevent SQL injection and comply with best practice.*
+## Project Report – Part 2: Database Questions
+
+### 1. What SQL statement creates the `events` table and defines its fields/columns?
+
+```sql
+CREATE TABLE events (
+    event_id INT,
+    event_name VARCHAR(100),
+    age_restriction INT,
+    capacity INT,
+    event_date DATE,
+    PRIMARY KEY (event_id)
+);
