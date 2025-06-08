@@ -44,3 +44,6 @@
 ## How to Run
 1. Run application: `python app.py`
 2. Access at `http://localhost:5000`
+
+## References
+1. Tan, E. (2021, August 18). Rear view Asian Chinese group of audience watching 3D movie in cinema enjoying the show together [Photograph]. iStock. https://www.istockphoto.com/photo/rear-view-asian-chinese-group-of-audience-watching-3d-movie-in-cinema-enjoying-the-gm1334590638-416653864
