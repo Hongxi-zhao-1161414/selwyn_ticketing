@@ -4,11 +4,15 @@
 
 {% block content %}
 
-<p>Home </p>
-
-
-<p>Add some brief text and an image here </p>
-
+<div class="row">
+    <div class="col-md-6">
+        <h1>Welcome to Selwyn Event Ticketing</h1>
+        <p>Selwyn Event Ticketing (SET) is a New Zealand based company that sells tickets for Events.</p>
+    </div>
+    <div class="col-md-6">
+        <img src="{{ url_for('static', filename='img/bg.png') }}" class="img-fluid rounded">
+    </div>
+</div>
 
 
 {% endblock %}

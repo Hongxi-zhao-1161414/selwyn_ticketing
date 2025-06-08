@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}{% if customer %}Edit{% else %}Add{% endif %} Customer - Selwyn Event Ticketing{% endblock %}
+
+{% block content %}
+<h2>{% if customer %}Edit Customer: {{ customer.first_name }} {{ customer.family_name }}{% else %}Add New Customer{% endif %}</h2>
+<form method="POST" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label for="first_name" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="first_name" name="first_name"
+               value="{% if customer %}{{ customer.first_name }}{% endif %}" required>
+        <div class="invalid-feedback">Please enter first name.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="family_name" class="form-label">Family Name</label>
+        <input type="text" class="form-control" id="family_name" name="family_name"
+               value="{% if customer %}{{ customer.family_name }}{% endif %}" required>
+        <div class="invalid-feedback">Please enter family name.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="date_of_birth" class="form-label">Date of Birth</label>
+        <input type="date" class="form-control" id="date_of_birth" name="date_of_birth"
+               value="{% if customer %}{{ customer.date_of_birth }}{% endif %}" required>
+        <div class="invalid-feedback">Please enter date of birth.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email"
+               value="{% if customer %}{{ customer.email }}{% endif %}" required>
+        <div class="invalid-feedback">Please enter a valid email.</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">{% if customer %}Update{% else %}Add{% endif %} Customer</button>
+    <a href="{{ url_for('customers') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

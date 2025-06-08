@@ -6,6 +6,32 @@
 
 <p>Events</p>
 
-<!-- Display a list of customers who have purchased tickets for a particular event -->
+<div class="event-header">
+    <h2>{{event_name}}</h2>
+    <h4>Event Date: {{event_date|format_date}}</h4>
+</div>
+
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>Email</th>
+            <th>Tickets Purchased</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for customer in customerlist %}
+        <tr onclick="window.location='{{ url_for('customer_summary', customer_id=customer.customer_id) }}'">
+            <td>{{ customer.first_name }} {{ customer.family_name }}</td>
+            <td>{{ customer.date_of_birth|format_date }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.tickets_purchased }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('events') }}" class="btn btn-secondary">Back to Events</a>
 
 {% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Selwyn Event Ticketing - Future Events{% endblock %}
+
+{% block content %}
+<h2>Future Events with Available Tickets</h2>
+{% if events %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Event</th>
+            <th>Date</th>
+            <th>Available Tickets</th>
+            <th>Age Restriction</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for event in events %}
+        <tr>
+            <td>{{ event.event_name }}</td>
+            <td>{{ event.event_date|format_date }}</td>
+            <td>{{ event.available_tickets }}</td>
+            <td>{{ event.age_restriction }}+</td>
+            <td>
+                <a href="{{ url_for('buytickets', event_id=event.event_id) }}" class="btn btn-sm btn-success">Buy Tickets</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-info">No upcoming events with available tickets.</div>
+{% endif %}
+{% endblock %}

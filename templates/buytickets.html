@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Buy Tickets - Selwyn Event Ticketing{% endblock %}
+
+{% block content %}
+<h2>Buy Tickets</h2>
+{% if event %}
+<div class="card mb-4">
+    <div class="card-body">
+        <h3>{{ event.event_name }}</h3>
+        <p><strong>Date:</strong> {{ event.event_date|format_date }}</p>
+        <p><strong>Available Tickets:</strong> {{ event.available_tickets }}</p>
+        <p><strong>Age Restriction:</strong> {{ event.age_restriction }}+</p>
+    </div>
+</div>
+
+<form method="POST" class="needs-validation" action="{{ url_for('buytickets') }}" >
+    <input type="hidden" name="event_id" value="{{ event.event_id }}">
+
+    <div class="mb-3">
+        <label for="customer_id" class="form-label">Select Customer</label>
+        <select class="form-select" name="customer_id" id="customer_id" required>
+            <option value="">Choose a customer</option>
+            {% for customer in customers %}
+            <option value="{{ customer.customer_id }}"
+                {% if customer.date_of_birth and event.age_restriction %}
+                    {% set age = (today - customer.date_of_birth).days // 365 %}
+                    {% if age < event.age_restriction %}disabled{% endif %}
+                {% endif %}>
+                {{ customer.first_name }} {{ customer.family_name }}
+                {% if customer.date_of_birth and event.age_restriction %}
+                    (Age: {{ (today - customer.date_of_birth).days // 365 }})
+                {% endif %}
+            </option>
+            {% endfor %}
+        </select>
+        <div class="invalid-feedback">Please select a customer.</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="tickets" class="form-label">Number of Tickets</label>
+        <input type="number" class="form-control" id="tickets" name="tickets" min="1"
+               max="{{ event.available_tickets }}" value="1" required>
+        <div class="invalid-feedback">Please enter a valid number of tickets (1-{{ event.available_tickets }}).</div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Purchase Tickets</button>
+    <a href="{{ url_for('futureevents') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% else %}
+<div class="alert alert-info">Please select an event to purchase tickets for.</div>
+{% endif %}
+{% endblock %}
